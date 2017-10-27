@@ -6,14 +6,10 @@ import sys
 import os.path
 
 
-
-
 class CameraController:
 
-
-	
 	def __init__(self):
-	"""Constructor for CameraControler"""
+	
 		self.camera = cv2.VideoCapture(0)
 		if not self.camera.isOpened():
 			print('Could not open camera')
@@ -25,14 +21,14 @@ class CameraController:
 
 	#Get a new frame from the camera
 	def getNewFrame(self):
-		"""Returns a new frame from the camrea"""
+		
 		ret, frame = self.camera.read();
 		if (ret):
 			return frame 
 
 
 	def setCameraParams(self,mtx,dist,rvecs,tvecs):
-		"""Sets the calibration values for the camera"""
+		
  		self.mtx = mtx
  		self.dist = dist
  		self.rvecs = rvecs
@@ -104,10 +100,10 @@ class CameraController:
 			self.calibrate()
 		return self.mtx, self.dist, self.rvecs, self.tvecs
 
-#############Main functions
+	def showImage(self, frame, image):
+		cv2.imshow(frame, image)
 
-
-cam = CameraController()
-m,d,r,t = cam.getCameraParams()
-
+	def destroy(self):
+		self.camera.release()
+		cv2.destroyAllWindows()
 
