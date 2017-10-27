@@ -100,10 +100,4 @@ class CameraController:
 			self.calibrate()
 		return self.mtx, self.dist, self.rvecs, self.tvecs
 
-	def showImage(self, frame, image):
-		cv2.imshow(frame, image)
-
-	def destroy(self):
-		self.camera.release()
-		cv2.destroyAllWindows()
-
+	
