@@ -14,7 +14,12 @@ win = w.Window()
 sfmmodule = sfm.StructureFromMotion()
 
 fmx = sfmmodule.getTwoPose(cam, dtec,win)
+print("fund")
 print(fmx)
+print('P:')
+Pmtx = sfmmodule.comp_P_from_fund(fmx)
+print(Pmtx)
+sfmmodule.triangulate(Pmtx)
 
 #demo of the dlib tracking
 while(1):
