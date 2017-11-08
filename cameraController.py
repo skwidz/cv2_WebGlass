@@ -85,7 +85,7 @@ class CameraController:
 				print("impoints has: " + str(len(imgpoints)) + " items")
 				
 				#break when you have 20 calibration images
-				if len(imgpoints) == 20:
+				if len(imgpoints) == 30:
 					break
 		ret, mtx, dist, rvecs, tvecs  = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::1], None, None)
 		self.saveCalibrationToFile(mtx,dist,rvecs,tvecs)
