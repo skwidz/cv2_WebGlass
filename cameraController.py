@@ -91,9 +91,9 @@ class CameraController:
 		self.saveCalibrationToFile(mtx,dist,rvecs,tvecs)
 		self.setCameraParams(mtx,dist,rvecs,tvecs)
 
-#gets the calibration parameters
-#if none are set, reads from a file, 
-#if no file exists, calibrates the camera
+	#gets the calibration parameters
+	#if none are set, reads from a file, 
+	#if no file exists, calibrates the camera
 	def getCameraParams(self):
 		ret = self.getCalibrationFromFile();
 		if not ret:

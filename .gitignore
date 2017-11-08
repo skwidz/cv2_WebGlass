@@ -1,2 +1,4 @@
 *.pik
 __pycache__
+camera.py
+*.xml
