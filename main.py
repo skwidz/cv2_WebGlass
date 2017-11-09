@@ -19,7 +19,9 @@ print(fmx)
 print('P:')
 Pmtx = sfmmodule.comp_P_from_fund(fmx)
 print(Pmtx)
-sfmmodule.triangulate(Pmtx)
+threeD = sfmmodule.triangulate(Pmtx)
+print(threeD)
+
 
 #demo of the dlib tracking
 while(1):

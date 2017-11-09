@@ -56,12 +56,25 @@ class StructureFromMotion:
 	def P1(self):
 		return np.array([[1.,0.,0., 0.], [0.,1.,0.,0.],[0.,0.,1.,0.]])
 
-	#triangulate the given poins
+	#triangulate the given poins, gives 
 	def triangulate(self,Proj):
-		#the max amount of points is 20, room for optimization here
+		print(Proj.dtype)
+		print(self.P1().dtype)
+		self.initialPoints = np.asarray(self.initialPoints, dtype=np.float64)
+		self.secondPoints = np.asarray(self.secondPoints, dtype=np.float64 )
+		print(self.initialPoints.dtype)
+		print(self.secondPoints.dtype)
+		#the max amount of points is 20, room for optimization :maybe less is better?
 		#does this even work?
-		threeD = cv2.triangulatePoints(self.P1(),Proj,self.initialPoints[28:48].T,self.secondPoints[28:48].T)
+		# print(self.initialPoints[28:45])
+		threeD = cv2.triangulatePoints(self.P1()[:3],Proj[:3],self.initialPoints[35:45].T[:2],self.secondPoints[35:45].T[:2])
+
 		return threeD
+
+
+	# def solvePnp(self):
+		
+
 
 #THE BELOW FUNCTIONS ARE SUBJECT TO THE FOLLOWING COPYRIGHT
 
