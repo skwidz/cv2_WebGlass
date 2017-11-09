@@ -20,7 +20,13 @@ while(1):
 	frame = cam.getNewFrame()
 	points = dtec.getFacialPointsNP(frame)[17:]
 	pointsFloat = np.asarray(points, "double")
-	success, rvec, tvec = cv2.solvePnP(threeD[:3].T, pointsFloat, K,D)
+	if not isinstance(points, list):
+		# should use ransac
+		success, rvec, tvec = cv2.solvePnP(threeD[:3].T, pointsFloat, K,D)
+		(noseendPoint2D, jacobian) = cv2.projectPoints(np.array([(0.0,0.0,10.0)]), rvec, tvec, K,D)
+		p1 = (points[13][0].astype(np.int32), points[13][1].astype(np.int32))
+		p2 = (noseendPoint2D[0][0][0].astype(np.int32), noseendPoint2D[0][0][1].astype(np.int32))
+		cv2.line(frame,p1,p2,(255,0,0),2)
 	print("rvec")
 	print(rvec)
 	print("tvec")
