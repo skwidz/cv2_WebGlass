@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 import cv2
 import numpy as np
+import scipy as sp
 import cameraController as cc
 import window as w
 import dlibDetector as dd
 import structureFromMotion as sfm
+
+from mpl_toolkits.mplot3d import axes3d 
+import matplotlib.pyplot as plt
 
 
 cam = cc.CameraController()
@@ -16,7 +20,18 @@ sfmmodule = sfm.StructureFromMotion()
 fmx = sfmmodule.getTwoPose(cam, dtec,win)
 Pmtx = sfmmodule.comp_P_from_fund(fmx)
 threeD = sfmmodule.triangulate(Pmtx)
+
+# Plotting the 3d poinys from sfm
+fig = plt.figure()
+ax=fig.gca(projection='3d')
+ax.plot(threeD[0], threeD[1], threeD[2], 'ko')
+plt.show() 
+
+
+i = 1
 while(1):
+	print("timetep:" + str(i) +"------------------")
+	i += 1
 	frame = cam.getNewFrame()
 	points = dtec.getFacialPointsNP(frame)[17:]
 	pointsFloat = np.asarray(points, "double")
