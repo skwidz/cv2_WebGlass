@@ -25,12 +25,16 @@ class Window:
 
     def placeGlasses(self,cam, win):
     	frame = cam.getNewFrame()
-    	glasses = cv2.imread("glasses.png")
+    	glasses = cv2.imread("glasses.png", flags=cv2.IMREAD_UNCHANGED)
+    	glasses = self.overlayGlasses(glasses)
     	gheight, gwidth, _ = glasses.shape
     	
     	while(1):
     		self.placing = True
     		frame2 = frame.copy()
+    		# frame2 = cv2.cvtColor(frame2, cv2.COLOR_BGR2BGRA)
+    	
+    		
     		frame2[self.yoff+1: self.yoff+1+gheight, self.xoff+1: self.xoff+1+gwidth] = glasses
     		win.showImage(frame2)
     		if cv2.waitKey(1) & 0xFF == ord('f'):
@@ -38,9 +42,20 @@ class Window:
     			break
 
 
-    def warpGlasses(self, frame, points):
-    	return true 
+    def overlayGlasses(self,overlay):
+    	mask = np.zeros_like(overlay)
+    	mask = mask[:,:,3:]
+    	ov = overlay[:,:,:3]
+    	ovmask = overlay[:,:,3:]
+    	bgmask = 255 - ovmask
+    	ovmask = cv2.cvtColor(ovmask, cv2.COLOR_GRAY2BGR)
+    	bgmask = cv2.cvtColor(bgmask, cv2.COLOR_GRAY2BGR)
 
+    	maskpart =  (mask * (1/255.0)) * (bgmask * (1/255.0))
+    	overlaypart = (ov * (1/255.0)) * (ovmask * (1/255.0))
+
+    	im = cv2.addWeighted(maskpart, 255.0, overlaypart, 255.0, 0.0)
+    	return im
 
     def mousecallback(self,event, x,y, flags, params):
     	if self.placing:
