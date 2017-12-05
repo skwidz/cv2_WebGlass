@@ -15,9 +15,7 @@ hom = h.Homography()
 frame = cam.getNewFrame()
 hom.getRefPoints(cam, dtec, win)
 g = glass.Glasses()
-# pd = input("Please input your Pupiary distance")
 g.placeGlasses(cam, win)
-
 while(1):
     frame = cam.getNewFrame()
     imagepath = g.imagePath
