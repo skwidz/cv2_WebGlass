@@ -16,6 +16,7 @@ frame = cam.getNewFrame()
 hom.getRefPoints(cam, dtec, win)
 g = glass.Glasses()
 g.placeGlasses(cam, win)
+print("Press j to change frames, press q+w to quit")
 while(1):
     frame = cam.getNewFrame()
     imagepath = g.imagePath
