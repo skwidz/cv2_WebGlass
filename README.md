@@ -1,7 +1,8 @@
 # cv2_WebGlass
 Webglass was developed to provide a better "virtual try-on" solution for buying glasses online.
 It was written as a seinor project for my undergraduate computing science degree. 
-Looking back at the code i'm not very happy with the code style and the general disorganization of the file.
+Looking back at the code i'm not very happy with the code style and the general disorganization of the files.
+If you're trying to make sense of it all, I'm sorry. 
 If I had drive to mainitan the project, I would rewrite it. 
 
 # Installation
